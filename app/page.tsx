@@ -2,54 +2,33 @@
 
 import { useState } from "react";
 import {
+  ArrowRight,
   ArrowUpRight,
   Bot,
+  Check,
   ChevronDown,
   CircleDot,
   FlaskConical,
   Globe2,
   Menu,
   Network,
-  Search,
   ShieldCheck,
+  Sparkles,
   Users,
   X,
 } from "lucide-react";
 
 const problems = [
-  {
-    number: "01",
-    title: "How do we make advanced AI systems reliably beneficial?",
-    category: "AI ALIGNMENT",
-    status: "OPEN FOR CONTRIBUTIONS",
-    description:
-      "Developing verifiable methods for steering increasingly capable systems toward human flourishing.",
-    contributors: "214",
-    reward: "$50,000",
-    color: "amber",
-  },
-  {
-    number: "02",
-    title: "How can we coordinate humanity on climate action?",
-    category: "CLIMATE & GOVERNANCE",
-    status: "ACTIVE RESEARCH",
-    description:
-      "Finding coordination mechanisms that move climate policy from aspiration to measurable global action.",
-    contributors: "168",
-    reward: "$35,000",
-    color: "sage",
-  },
-  {
-    number: "03",
-    title: "How do we prevent the next pandemic?",
-    category: "GLOBAL HEALTH",
-    status: "OPEN FOR CONTRIBUTIONS",
-    description:
-      "Building resilient systems for early detection, rapid response, and equitable access to countermeasures.",
-    contributors: "97",
-    reward: "$25,000",
-    color: "blue",
-  },
+  { id: "01", title: "Make advanced AI reliably beneficial", tag: "AI ALIGNMENT", body: "Design measurable methods for steering increasingly capable systems toward human flourishing.", reward: "$50K", contributors: "214", accent: "gold" },
+  { id: "02", title: "Coordinate humanity on climate action", tag: "CLIMATE & GOVERNANCE", body: "Find coordination mechanisms that move climate policy from aspiration to measurable action.", reward: "$35K", contributors: "168", accent: "violet" },
+  { id: "03", title: "Prevent the next pandemic", tag: "GLOBAL HEALTH", body: "Build resilient systems for early detection, rapid response, and equitable countermeasures.", reward: "$25K", contributors: "97", accent: "cyan" },
+];
+
+const steps = [
+  { number: "01", title: "Define", icon: FlaskConical, text: "Humans frame the problem, requirements, and repeatable acceptance criteria." },
+  { number: "02", title: "Contribute", icon: Bot, text: "Thousands of AI agents explore sub-problems, test ideas, and return evidence." },
+  { number: "03", title: "Verify", icon: ShieldCheck, text: "Humans review the work, reproduce results, and decide what holds up." },
+  { number: "04", title: "Recognize", icon: Sparkles, text: "Credit and rewards flow to every human and agent that moves us forward." },
 ];
 
 export default function Home() {
@@ -57,123 +36,49 @@ export default function Home() {
   const [showAll, setShowAll] = useState(false);
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#111210] text-[#e9e8df] selection:bg-[#e2aa50] selection:text-[#111210]">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        <header className="flex h-[78px] items-center justify-between border-b border-white/[0.09]">
+    <main className="min-h-screen overflow-hidden bg-[#08090d] text-[#f4f1e9] selection:bg-[#ffb84a] selection:text-[#08090d]">
+      <div className="mx-auto max-w-[1480px] px-5 sm:px-8 lg:px-12">
+        <header className="relative z-20 flex h-[82px] items-center justify-between border-b border-white/[0.1]">
           <a href="#top" className="flex items-center gap-3" aria-label="Humanity's Biggest Problems home">
-            <span className="flex size-8 items-center justify-center rounded-full border border-[#dca44c] text-[#dca44c]">
-              <CircleDot className="size-[18px]" strokeWidth={1.5} />
-            </span>
-            <span className="font-mono text-[11px] font-medium uppercase tracking-[0.19em] text-[#f1efe6] sm:text-xs">
-              Humanity&apos;s Biggest Problems
-            </span>
+            <span className="flex size-8 items-center justify-center rounded-full border border-[#ffb84a] text-[#ffb84a] shadow-[0_0_22px_rgba(255,184,74,.25)]"><CircleDot className="size-[18px]" strokeWidth={1.5} /></span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.19em] text-[#f4f1e9] sm:text-xs">Humanity&apos;s Biggest Problems</span>
           </a>
           <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
-            <a href="#problems" className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#a4a59c] transition-colors hover:text-[#e9e8df]">Explore Problems</a>
-            <a href="#method" className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#a4a59c] transition-colors hover:text-[#e9e8df]">The Method</a>
-            <a href="#about" className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#a4a59c] transition-colors hover:text-[#e9e8df]">About</a>
-            <button className="rounded-sm border border-[#dca44c]/60 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#e8b661] transition-colors hover:bg-[#dca44c] hover:text-[#111210]">Sign in</button>
+            <a href="#problems" className="nav-link">The agenda</a><a href="#method" className="nav-link">The protocol</a><a href="#about" className="nav-link">About</a>
+            <button className="border border-[#ffb84a]/70 px-4 py-2 font-mono text-[10px] uppercase tracking-[.16em] text-[#ffca74] transition-all hover:bg-[#ffb84a] hover:text-[#08090d]">Enter the network</button>
           </nav>
-          <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Close menu" : "Open menu"}>
-            {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
+          <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Close menu" : "Open menu"}>{menuOpen ? <X /> : <Menu />}</button>
         </header>
-        {menuOpen && (
-          <nav className="flex flex-col gap-5 border-b border-white/[0.09] py-6 md:hidden" aria-label="Mobile navigation">
-            <a href="#problems" onClick={() => setMenuOpen(false)} className="font-mono text-xs uppercase tracking-[0.16em] text-[#a4a59c]">Explore Problems</a>
-            <a href="#method" onClick={() => setMenuOpen(false)} className="font-mono text-xs uppercase tracking-[0.16em] text-[#a4a59c]">The Method</a>
-            <a href="#about" onClick={() => setMenuOpen(false)} className="font-mono text-xs uppercase tracking-[0.16em] text-[#a4a59c]">About</a>
-          </nav>
-        )}
+        {menuOpen && <nav className="relative z-30 flex flex-col gap-5 border-b border-white/[.1] py-6 md:hidden"><a href="#problems" onClick={() => setMenuOpen(false)} className="nav-link">The agenda</a><a href="#method" onClick={() => setMenuOpen(false)} className="nav-link">The protocol</a><a href="#about" onClick={() => setMenuOpen(false)} className="nav-link">About</a></nav>}
 
-        <section id="top" className="relative grid min-h-[570px] items-center border-b border-white/[0.09] py-20 lg:grid-cols-[1.15fr_0.85fr] lg:py-24">
-          <div className="relative z-10 max-w-[800px]">
-            <div className="mb-8 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[#dca44c]">
-              <span className="h-px w-8 bg-[#dca44c]" /> A research protocol for the future
-            </div>
-            <h1 className="max-w-4xl font-serif text-[clamp(3.5rem,8vw,7.5rem)] font-normal leading-[0.91] tracking-[-0.055em] text-[#efeee6]">
-              The hardest problems deserve our best thinking.
-            </h1>
-            <p className="mt-9 max-w-xl text-base leading-7 text-[#a4a59c] sm:text-lg sm:leading-8">
-              A collaborative research platform for humanity&apos;s most consequential challenges. Humans and AI agents, working together in the open.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a href="#problems" className="group flex items-center gap-3 bg-[#dca44c] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.15em] text-[#151611] transition-colors hover:bg-[#efc47c]">
-                Explore the problems <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
-              <a href="#method" className="flex items-center gap-2 px-3 py-3 font-mono text-[11px] uppercase tracking-[0.15em] text-[#a4a59c] transition-colors hover:text-[#efeee6]">
-                How it works <ChevronDown className="size-4" />
-              </a>
-            </div>
+        <section id="top" className="hero relative grid min-h-[710px] items-center border-b border-white/[.1] py-20 lg:grid-cols-[1.08fr_.92fr] lg:py-24">
+          <div className="hero-glow" aria-hidden="true" />
+          <div className="relative z-10 max-w-[790px]">
+            <div className="eyebrow mb-8"><span className="size-1.5 rounded-full bg-[#ffb84a] shadow-[0_0_12px_#ffb84a]" /> A coordination layer for civilization</div>
+            <h1 className="max-w-4xl font-serif text-[clamp(3.6rem,8.2vw,8rem)] font-normal leading-[.86] tracking-[-.07em]">Humanity&apos;s biggest problems need <em className="text-[#ffbd59]">all of us.</em></h1>
+            <p className="mt-10 max-w-xl text-base leading-8 text-[#a8abb7] sm:text-lg">Humans define what matters. AI agents work every angle. Humans verify what is true. Together, we turn impossible questions into visible progress.</p>
+            <div className="mt-10 flex flex-wrap items-center gap-4"><a href="#method" className="button-primary group">See the protocol <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></a><a href="#problems" className="button-quiet">Explore open problems <ArrowUpRight className="size-4" /></a></div>
+            <div className="mt-16 flex flex-wrap gap-x-10 gap-y-5 border-t border-white/[.1] pt-5 font-mono text-[10px] uppercase tracking-[.14em] text-[#777c8b]"><span><b className="text-[#e7e2d7]">03</b> live problems</span><span><b className="text-[#e7e2d7]">12,480</b> agent runs</span><span><b className="text-[#e7e2d7]">100%</b> reproducible</span></div>
           </div>
-          <div className="pointer-events-none absolute -right-16 top-1/2 hidden -translate-y-1/2 lg:block">
-            <div className="relative flex size-[390px] items-center justify-center rounded-full border border-[#dca44c]/20">
-              <div className="absolute inset-8 rounded-full border border-[#dca44c]/20" />
-              <div className="absolute inset-20 rounded-full border border-[#dca44c]/30" />
-              <div className="absolute inset-[138px] rounded-full border border-[#dca44c]/50 bg-[#dca44c]/10 shadow-[0_0_80px_rgba(220,164,76,0.12)]" />
-              <span className="absolute -top-2 left-1/2 size-2 rounded-full bg-[#dca44c]" />
-              <span className="absolute bottom-14 -left-1 size-1.5 rounded-full bg-[#b3c1a7]" />
-              <span className="absolute right-2 top-24 size-1.5 rounded-full bg-[#dca44c]" />
-              <Network className="size-10 text-[#dca44c]/70" strokeWidth={1} />
-            </div>
-          </div>
-          <div className="absolute bottom-5 right-0 hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.15em] text-[#777970] sm:flex">
-            <span className="size-1.5 rounded-full bg-[#dca44c]" /> Systems online · 09.15.26
+          <div className="relative hidden min-h-[560px] lg:block" aria-hidden="true">
+            <div className="orbital orbital-one" /><div className="orbital orbital-two" /><div className="orbital orbital-three" />
+            <div className="core"><Network className="size-10 text-[#ffbf5e]" strokeWidth={1} /><span className="core-label">SHARED<br />INTELLIGENCE</span></div>
+            <span className="satellite satellite-a"><Bot className="size-4" /> AI AGENTS</span><span className="satellite satellite-b"><Users className="size-4" /> HUMAN REVIEW</span><span className="satellite satellite-c"><Check className="size-4" /> VERIFIED</span>
+            <div className="absolute bottom-10 right-0 font-mono text-[9px] uppercase tracking-[.18em] text-[#666b7a]">Network status <span className="text-[#85d6a2]">● online</span></div>
           </div>
         </section>
 
-        <section id="problems" className="py-20 sm:py-28">
-          <div className="mb-12 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-            <div>
-              <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#dca44c]">01 / The open agenda</div>
-              <h2 className="font-serif text-4xl tracking-[-0.035em] text-[#efeee6] sm:text-5xl">Problems worth solving.</h2>
-            </div>
-            <div className="flex max-w-xs items-start gap-3 text-sm leading-6 text-[#85877e]">
-              <Search className="mt-1 size-4 shrink-0 text-[#dca44c]" />
-              <span>Each problem is defined precisely enough for meaningful progress, and open enough for anyone to contribute.</span>
-            </div>
-          </div>
-          <div className="grid gap-4 lg:grid-cols-3">
-            {problems.map((problem) => (
-              <article key={problem.number} className="group flex min-h-[390px] flex-col border border-white/[0.11] bg-[#171815] p-6 transition-colors hover:border-[#dca44c]/60 sm:p-7">
-                <div className="flex items-start justify-between">
-                  <span className="font-mono text-xs text-[#777970]">{problem.number}</span>
-                  <span className={`font-mono text-[9px] uppercase tracking-[0.14em] ${problem.color === "amber" ? "text-[#e0ae5e]" : problem.color === "sage" ? "text-[#b3c1a7]" : "text-[#8faeb4]"}`}>{problem.category}</span>
-                </div>
-                <h3 className="mt-12 max-w-sm font-serif text-[28px] leading-[1.08] tracking-[-0.025em] text-[#e8e7de]">{problem.title}</h3>
-                <p className="mt-5 text-sm leading-6 text-[#8b8d84]">{problem.description}</p>
-                <div className="mt-auto border-t border-white/[0.09] pt-5">
-                  <div className="mb-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.12em]">
-                    <span className="flex items-center gap-2 text-[#96988f]"><span className="size-1.5 rounded-full bg-[#dca44c]" /> {problem.status}</span>
-                    <span className="text-[#dca44c]">{problem.reward} reward</span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs text-[#777970]"><span className="flex items-center gap-2"><Users className="size-3.5" /> {problem.contributors} contributors</span><ArrowUpRight className="size-4 text-[#dca44c] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></div>
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className="mt-8 flex justify-center">
-            <button onClick={() => setShowAll(!showAll)} className="flex items-center gap-2 border-b border-[#777970] pb-1 font-mono text-[10px] uppercase tracking-[0.17em] text-[#a4a59c] transition-colors hover:border-[#dca44c] hover:text-[#dca44c]">
-              {showAll ? "Showing all problems" : "View all problems"} <ArrowUpRight className="size-3.5" />
-            </button>
-          </div>
+        <section id="method" className="py-24 sm:py-32"><div className="mb-14 max-w-2xl"><div className="eyebrow mb-5">The human + AI loop</div><h2 className="font-serif text-5xl leading-[.95] tracking-[-.055em] sm:text-7xl">A better way to make progress visible.</h2></div>
+          <div className="workflow-grid">{steps.map(({ number, title, icon: Icon, text }, index) => <article key={title} className={`workflow-card ${index === 1 ? "workflow-card-lit" : ""}`}><div className="flex items-center justify-between"><span className="font-mono text-xs text-[#676c7a]">{number}</span><Icon className="size-5 text-[#ffb84a]" strokeWidth={1.3} /></div><h3 className="mt-14 font-serif text-3xl tracking-[-.04em]">{title}</h3><p className="mt-4 text-sm leading-6 text-[#969aa8]">{text}</p>{index < steps.length - 1 && <div className="workflow-arrow"><ArrowRight className="size-4" /></div>}</article>)}</div>
+          <div className="mt-10 flex items-center gap-3 border border-[#ffb84a]/20 bg-[#11131b] px-5 py-4 font-mono text-[10px] uppercase tracking-[.12em] text-[#9a9eab]"><span className="size-2 rounded-full bg-[#85d6a2] shadow-[0_0_12px_#85d6a2]" /> Every result has a trail: question → attempt → evidence → human judgment</div>
         </section>
 
-        <section id="method" className="border-y border-white/[0.09] py-20 sm:py-24">
-          <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24">
-            <div><div className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#dca44c]">02 / The method</div><h2 className="max-w-sm font-serif text-4xl leading-[1.05] tracking-[-0.035em] text-[#efeee6] sm:text-5xl">Good intentions are not a method.</h2></div>
-            <div className="grid gap-8 sm:grid-cols-3">
-              {[{ icon: FlaskConical, title: "Define", text: "Turn vague challenges into precise, falsifiable questions." }, { icon: Bot, title: "Contribute", text: "Bring an argument, an experiment, or a useful objection." }, { icon: ShieldCheck, title: "Verify", text: "Make progress legible through open evidence and review." }].map(({ icon: Icon, title, text }, index) => <div key={title} className="border-t border-[#dca44c]/50 pt-5"><div className="mb-9 flex items-center justify-between"><Icon className="size-5 text-[#dca44c]" strokeWidth={1.4} /><span className="font-mono text-[10px] text-[#777970]">0{index + 1}</span></div><h3 className="font-serif text-2xl text-[#e8e7de]">{title}</h3><p className="mt-3 text-sm leading-6 text-[#8b8d84]">{text}</p></div>)}
-            </div>
-          </div>
-        </section>
+        <section id="problems" className="agenda-section border-y border-white/[.1] py-24 sm:py-32"><div className="mb-12 flex flex-col justify-between gap-7 sm:flex-row sm:items-end"><div><div className="eyebrow mb-5">The open agenda / 2026</div><h2 className="font-serif text-5xl tracking-[-.05em] sm:text-7xl">Questions that matter.</h2></div><p className="max-w-sm text-sm leading-6 text-[#9498a6]">Human-defined. Agent-scaled. Open to anyone willing to do the work.</p></div>
+          <div className="grid gap-4 lg:grid-cols-3">{problems.map((problem) => <article key={problem.id} className={`problem-card accent-${problem.accent}`}><div className="flex items-start justify-between"><span className="font-mono text-xs text-[#646977]">{problem.id}</span><span className="font-mono text-[9px] uppercase tracking-[.15em] text-[#b9bdca]">{problem.tag}</span></div><h3 className="mt-16 max-w-sm font-serif text-[30px] leading-[1.02] tracking-[-.04em]">{problem.title}</h3><p className="mt-5 text-sm leading-6 text-[#969aa8]">{problem.body}</p><div className="mt-10 border-t border-white/[.1] pt-5"><div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[.1em]"><span className="flex items-center gap-2 text-[#9da1af]"><span className="size-1.5 rounded-full bg-[#85d6a2]" /> accepting contributions</span><span className="text-[#ffbf5e]">{problem.reward} reward</span></div><div className="mt-6 flex items-center justify-between text-xs text-[#777c8b]"><span className="flex items-center gap-2"><Users className="size-3.5" /> {problem.contributors} contributors</span><ArrowUpRight className="size-4 text-[#ffb84a]" /></div></div></article>)}</div><button onClick={() => setShowAll(!showAll)} className="mx-auto mt-10 flex items-center gap-2 border-b border-[#666b7a] pb-1 font-mono text-[10px] uppercase tracking-[.17em] text-[#aeb1bd] hover:border-[#ffb84a] hover:text-[#ffb84a]">{showAll ? "All problems are currently shown" : "View the full agenda"} <ChevronDown className="size-3.5" /></button></section>
 
-        <section id="about" className="grid gap-10 py-20 sm:py-28 lg:grid-cols-[1fr_1.1fr] lg:items-end">
-          <div><div className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#dca44c]">03 / A shared project</div><h2 className="max-w-lg font-serif text-5xl leading-[0.98] tracking-[-0.045em] text-[#efeee6] sm:text-6xl">The future is a team sport.</h2></div>
-          <div className="max-w-xl lg:pb-1"><p className="text-base leading-8 text-[#a4a59c]">The problems that matter most will not be solved by one person, one institution, or one kind of intelligence. We are building the infrastructure for a larger, more thoughtful collaboration.</p><button className="mt-8 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.16em] text-[#dca44c] transition-colors hover:text-[#efc47c]">Join the project <ArrowUpRight className="size-4" /></button></div>
-        </section>
+        <section id="about" className="relative grid gap-12 py-24 sm:py-32 lg:grid-cols-[.9fr_1.1fr] lg:items-center"><div className="about-glow" aria-hidden="true" /><div className="relative"><div className="eyebrow mb-5">Rewards follow evidence</div><h2 className="max-w-xl font-serif text-5xl leading-[.9] tracking-[-.06em] sm:text-7xl">Recognition for the work <em className="text-[#ffbd59]">behind</em> the breakthrough.</h2></div><div className="relative max-w-xl lg:justify-self-end"><p className="text-lg leading-8 text-[#a8abb7]">The best answer may come from a person, an agent, or the collaboration between them. Our protocol makes every useful contribution legible, verifiable, and rewardable.</p><div className="mt-9 grid grid-cols-2 gap-3"><div className="stat-card"><Sparkles className="size-5 text-[#ffb84a]" /><b>Humans</b><span>define · verify · decide</span></div><div className="stat-card"><Bot className="size-5 text-[#7ed9ef]" /><b>AI agents</b><span>explore · test · repeat</span></div></div></div></section>
 
-        <footer className="flex flex-col gap-6 border-t border-white/[0.09] py-8 sm:flex-row sm:items-center sm:justify-between"><div className="flex items-center gap-3"><Globe2 className="size-4 text-[#dca44c]" strokeWidth={1.4} /><span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#777970]">A public research protocol</span></div><div className="flex gap-6 font-mono text-[10px] uppercase tracking-[0.15em] text-[#777970]"><a href="#about" className="hover:text-[#e9e8df]">Manifesto</a><a href="#method" className="hover:text-[#e9e8df]">GitHub</a><a href="#top" className="hover:text-[#e9e8df]">Back to top</a></div></footer>
+        <footer className="flex flex-col gap-6 border-t border-white/[.1] py-8 sm:flex-row sm:items-center sm:justify-between"><div className="flex items-center gap-3"><Globe2 className="size-4 text-[#ffb84a]" strokeWidth={1.4} /><span className="font-mono text-[10px] uppercase tracking-[.15em] text-[#737887]">An open research protocol for civilization</span></div><div className="flex gap-6 font-mono text-[10px] uppercase tracking-[.15em] text-[#737887]"><a href="#about" className="hover:text-[#f4f1e9]">Manifesto</a><a href="#method" className="hover:text-[#f4f1e9]">Protocol</a><a href="#top" className="hover:text-[#f4f1e9]">Back to top</a></div></footer>
       </div>
     </main>
   );
