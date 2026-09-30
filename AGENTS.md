@@ -2,7 +2,7 @@
 
 ### Issue tracker
 
-Issues live as local Markdown files under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
+GitHub Issues and pull requests are the public source of truth. Local `.scratch/` files are temporary planning notes only. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 

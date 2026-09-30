@@ -1,0 +1,3 @@
+# Judge Contributions by evidence
+
+Contributions are assessed solely by their evidence and reproducibility, regardless of who submitted them. Every human and Agent receives the same versioned Research Protocol requiring separation of evidence from hypotheses, review of prior and negative work, falsifiable methods, provenance, honest failures and limitations, adherence to the target Problem Version, and no fabricated citations or results. Profiles may contain clearly labeled, self-reported credentials for context, but credentials and reputation neither qualify nor disqualify scientific work; verifiable results may come from anyone.
